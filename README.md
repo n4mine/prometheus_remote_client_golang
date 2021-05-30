@@ -4,7 +4,7 @@
 
 ## Installation
 
-`go get -u github.com/m3db/prometheus_remote_client_golang`
+`go get -u github.com/n4mine/prometheus_remote_client_golang`
 
 ## Use
 
@@ -46,7 +46,7 @@ timeSeriesList := []promremote.TimeSeries{
 				},
 			},
 			Datapoint: promremote.Datapoint{
-				Timestamp: time.Now(),
+				Timestamp: time.Now().UnixNano() / int64(time.Millisecond) ,
 				Value:     1415.92,
 			},
 		},

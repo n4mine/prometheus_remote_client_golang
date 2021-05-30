@@ -100,7 +100,7 @@ func TestPromRemoteClientWrite(t *testing.T) {
 				},
 			},
 			Datapoint: Datapoint{
-				Timestamp: now,
+				Timestamp: nowMillis,
 				Value:     1415.92,
 			},
 		},
@@ -139,7 +139,7 @@ func TestPromRemoteClientWriteNotHTTPOK(t *testing.T) {
 				},
 			},
 			Datapoint: Datapoint{
-				Timestamp: now,
+				Timestamp: nowMillis,
 				Value:     1415.92,
 			},
 		},

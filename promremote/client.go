@@ -66,7 +66,7 @@ type TSList []TimeSeries
 
 // A Datapoint is a single data value reported at a given time.
 type Datapoint struct {
-	Timestamp time.Time
+	Timestamp int64
 	Value     float64
 }
 
@@ -281,7 +281,7 @@ func (t TSList) toPromWriteRequest() *prompb.WriteRequest {
 
 		sample := []prompb.Sample{prompb.Sample{
 			// Timestamp is int milliseconds for remote write.
-			Timestamp: ts.Datapoint.Timestamp.UnixNano() / int64(time.Millisecond),
+			Timestamp: ts.Datapoint.Timestamp,
 			Value:     ts.Datapoint.Value,
 		}}
 		promTS[i] = prompb.TimeSeries{Labels: labels, Samples: sample}

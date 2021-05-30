@@ -31,7 +31,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/m3db/prometheus_remote_client_golang/promremote"
+	"github.com/n4mine/prometheus_remote_client_golang/promremote"
 )
 
 type labelList []promremote.Label
@@ -163,7 +163,7 @@ func (h *headerList) Set(value string) error {
 }
 
 func (d *dp) String() string {
-	return fmt.Sprintf("%v", []string{d.Timestamp.String(), fmt.Sprintf("%v", d.Value)})
+	return fmt.Sprintf("%v", []string{fmt.Sprintf("%v", d.Timestamp), fmt.Sprintf("%v", d.Value)})
 }
 
 func (d *dp) Set(value string) error {
@@ -172,15 +172,15 @@ func (d *dp) Set(value string) error {
 		return fmt.Errorf("incorrect number of arguments to '-d': %d", len(dp))
 	}
 
-	var ts time.Time
+	var ts int64
 	if strings.ToLower(dp[0]) == "now" {
-		ts = time.Now()
+		ts = time.Now().Unix()*1e3
 	} else {
 		i, err := strconv.Atoi(dp[0])
 		if err != nil {
 			return fmt.Errorf("unable to parse timestamp: %s", dp[1])
 		}
-		ts = time.Unix(int64(i), 0)
+		ts = int64(i*1e3)
 	}
 
 	val, err := strconv.ParseFloat(dp[1], 64)
