@@ -52,7 +52,7 @@ timeSeriesList := []promremote.TimeSeries{
 		},
 	}
 
-if err := client.WriteTimeSeries(timeSeriesList); err != nil {
+if _, err := client.WriteTimeSeries(context.Background(), timeSeriesList, promremote.WriteOptions{}); err != nil {
 	log.Fatal(err)
 }
 ```
